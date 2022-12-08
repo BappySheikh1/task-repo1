@@ -1,12 +1,33 @@
 import React from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { useProvider } from "../contents/AuthProvider";
 
 const Header = () => {
-   
+   const {user,logOutUser}=useProvider()
+   const handleLogOut=()=>{
+    logOutUser()
+    .then(()=>{
+        toast.success("logout successfully")
+    }).catch(err =>{
+        console.log(err);
+    })
+   }
+
     const menuItems =<React.Fragment>
         <li><Link to='/'>Home</Link></li>
-        <li><Link to='/login'>Login</Link></li>
-        <li><Link to='/register'>Register</Link></li>
+        {
+           user ?
+           <>
+           <button onClick={handleLogOut}>LogOut</button>
+           </>
+           :
+           <>
+            <li><Link to='/login'>Login</Link></li>
+            <li><Link to='/register'>Register</Link></li>
+           </>
+        }
+       
     </React.Fragment>
     return (
         <div>

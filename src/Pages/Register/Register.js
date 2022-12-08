@@ -1,7 +1,8 @@
 import React from 'react';
+import { useProvider } from '../../contents/AuthProvider';
 
 const Register = () => {
-
+const {createUser,userProfileName}=useProvider()
     const handleSubmit=(e)=>{
      e.preventDefault()
      const form=e.target
@@ -9,7 +10,27 @@ const Register = () => {
      const email=form.email.value
      const password=form.password.value
      console.log(name,email,password);
+     createUser(email,password)
+     .then(result =>{
+        const user =result.user
+        console.log(user);
+        handleUpdateName(name)
 
+     }).catch(err =>{
+        console.log(err);
+     })
+    }
+
+    const handleUpdateName=(name)=>{
+        const provider ={
+            displayName: name
+        }
+        userProfileName(provider)
+        .then(()=>{
+
+        }).catch(err=>{
+         console.log(err);
+        })
     }
 
     return (
@@ -46,7 +67,7 @@ const Register = () => {
         </div>
 
         <div className="form-control mt-6">
-          <button className="btn btn-primary">Login</button>
+          <button className="btn btn-primary">Register</button>
         </div>
       </form>
     </div>
