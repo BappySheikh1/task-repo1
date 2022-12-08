@@ -6,7 +6,7 @@ import AuthProvider from './contents/AuthProvider';
 
 function App() {
   return (
-    <div className="App">
+    <div className="max-w-screen-xl mx-auto">
       <AuthProvider>
       <RouterProvider router={router}/>
       </AuthProvider>

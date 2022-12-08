@@ -31,8 +31,14 @@ const AuthProvider = ({children}) => {
         return ()=> unsubscribe()
     },[])
 
-    const name = 'bappy'
-    const authInfo = {name }
+    
+    const authInfo = {
+          user,
+          createUser,
+          userProfileName,
+          logInUser,
+          logOutUser
+     }
     return (
         <AuthContext.Provider value={authInfo}>
             {children}
